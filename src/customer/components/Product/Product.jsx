@@ -38,32 +38,32 @@ export default function Product() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const handleFilter=(value, sectionId)=>{
+    const handleFilter = (value, sectionId) => {
         const searchParams = new URLSearchParams(location.search);
         let filterValue = searchParams.getAll(sectionId);
 
-        if(filterValue.length>0 && filterValue[0].split(",").includes(value)){
-            filterValue = filterValue[0].split(",").filter((item)=>item!=value);
+        if (filterValue.length > 0 && filterValue[0].split(",").includes(value)) {
+            filterValue = filterValue[0].split(",").filter((item) => item != value);
 
-            if(filterValue.length === 0){
+            if (filterValue.length === 0) {
                 searchParams.delete(sectionId);
             }
-        }else{
+        } else {
             filterValue.push(value);
         }
 
-        if(filterValue.length > 0){
-            searchParams.set(sectionId,filterValue.join(","));
+        if (filterValue.length > 0) {
+            searchParams.set(sectionId, filterValue.join(","));
         }
         const query = searchParams.toString();
-        navigate({search:`?${query}`});
+        navigate({ search: `?${query}` });
     }
 
-    const handleRadioFilterChange = (value,sectionId)=>{
+    const handleRadioFilterChange = (value, sectionId) => {
         const searchParams = new URLSearchParams(location.search);
-        searchParams.set(sectionId,value);
+        searchParams.set(sectionId, value);
         const query = searchParams.toString();
-        navigate({search:`?${query}`});
+        navigate({ search: `?${query}` });
     }
 
     return (
@@ -332,7 +332,7 @@ export default function Product() {
                                                             defaultValue="female"
                                                             name="radio-buttons-group">
                                                             {section.options.map((option, optionIdx) => (
-                                                                <FormControlLabel onChange={()=>handleRadioFilterChange(option.value,section.id)} value={option.value} control={<Radio />} label={option.label} />
+                                                                <FormControlLabel onChange={() => handleRadioFilterChange(option.value, section.id)} value={option.value} control={<Radio />} label={option.label} />
                                                             ))}
                                                         </RadioGroup>
                                                     </FormControl>
